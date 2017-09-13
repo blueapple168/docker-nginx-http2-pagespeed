@@ -1,13 +1,3 @@
-# https://www.openssl.org/source/
-# http://nginx.org/en/CHANGES
-# https://github.com/pagespeed/ngx_pagespeed/releases
-# http://nginx.org/en/docs/configure.html
-# https://www.nginx.com/resources/admin-guide/installing-nginx-open-source/
-# https://www.nginx.com/resources/wiki/start/topics/tutorials/installoptions/
-# http://siawyoung.com/coding/sysadmin/nginx/downloading-and-installing-nginx.html
-# https://n0where.net/how-to-enable-http2-in-nginx/
-# https://www.nginx.com/blog/nginx-dynamic-modules-how-they-work/
-
 FROM debian:stretch-slim
 
 MAINTAINER df1228@gmail.com
@@ -15,6 +5,7 @@ MAINTAINER df1228@gmail.com
 ENV OPENSSL_VERSION 1.1.0f
 ENV NGINX_VERSION 1.13.3
 ENV NPS_VERSION 1.12.34.2-stable
+ENV NGINX_USER nginx
 
 RUN set -x \
     && apt-get update \
@@ -37,7 +28,8 @@ RUN set -x \
     && [ -e scripts/format_binary_url.sh ] && psol_url=$(scripts/format_binary_url.sh PSOL_BINARY_URL) \
     && wget ${psol_url} \
     && tar -xvzf $(basename ${psol_url}) \
-
+    
+    && useradd --no-create-home --user-group ${NGINX_USER} \
 
     && cd \
     && wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
