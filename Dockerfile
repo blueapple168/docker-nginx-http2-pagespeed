@@ -37,8 +37,8 @@ RUN set -x \
     && cd nginx-${NGINX_VERSION} \
     && ./configure \
         --prefix=/usr/local/nginx \
-        --user=nginx \
-        --group=nginx \
+        --user=${NGINX_USER} \
+        --group=${NGINX_USER} \
         --sbin-path=/usr/sbin/nginx \
         --conf-path=/etc/nginx/nginx.conf \
         --pid-path=/var/run/nginx.pid \
