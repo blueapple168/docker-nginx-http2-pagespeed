@@ -68,6 +68,8 @@ RUN rm -rf $HOME
 RUN apt-get purge build-essential -y \
     && apt-get autoremove -y
 
+RUN adduser --system --no-create-home --user-group --disabled-login --disabled-password nginx
+
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
