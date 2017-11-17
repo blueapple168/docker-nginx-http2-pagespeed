@@ -29,7 +29,7 @@ RUN set -x \
     && wget ${psol_url} \
     && tar -xvzf $(basename ${psol_url}) \
     
-    && useradd --system --no-create-home --user-group --disabled-login --disabled-password  ${NGINX_USER} \
+    && useradd --system --no-create-home --user-group ${NGINX_USER} \
 
     && cd \
     && wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
